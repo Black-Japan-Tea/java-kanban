@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class TaskManager {
-    HashMap<Integer, Task> tasks;
-    HashMap<Integer, Epic> epics;
-    HashMap<Integer, Subtask> subtasks;
-    int nextId = 1;
+    private HashMap<Integer, Task> tasks;
+    private HashMap<Integer, Epic> epics;
+    private HashMap<Integer, Subtask> subtasks;
+    private int nextId = 1;
 
 
     public TaskManager() {
@@ -20,6 +21,9 @@ public class TaskManager {
         tasks.put(task.getId(), task);
     }
     public void updTask(Task task) {
+        if (!tasks.containsKey(task.getId())) {
+            return;
+        }
         tasks.put(task.getId(), task);
     }
     public void rmvTasks() {
@@ -32,24 +36,29 @@ public class TaskManager {
         epics.put(epic.getId(), epic);
     }
     public void updEpic(Epic epic) {
-        epics.put(epic.getId(), epic);
+        if (!epics.containsKey(epic.getId())) {
+            return;
+        }
+        Epic uEpic = epics.get(epic.getId());
+        uEpic.setName(epic.getName());
+        uEpic.setDescription(epic.getDescription());
     }
-    private void updEpicStatus(int epicId) {
+    private void updEpicStatus(Epic epicId) {
         Epic epic = epics.get(epicId);
         boolean isAllNew = true;
         boolean isAllDone = true;
-        for (Integer subtaskId : epic.subtasks) {
+        for (Integer subtaskId : epic.getSubtasks()) {
             Subtask subtask = subtasks.get(subtaskId);
-            if (subtask.status != Status.NEW) {
+            if (subtask.getStatus() != Status.NEW) {
                 isAllNew = false;
-            } if (subtask.status != Status.DONE) {
+            } if (subtask.getStatus() != Status.DONE) {
                 isAllDone = false;
             }
         }
-        if (isAllDone) {
-            epic.status = Status.DONE;
-        } else if (isAllNew) {
+        if (subtasks.isEmpty() || isAllNew) {
             epic.status = Status.NEW;
+        } else if (isAllDone) {
+            epic.status = Status.DONE;
         } else {
             epic.status = Status.IN_PROGRESS;
         }
@@ -61,21 +70,29 @@ public class TaskManager {
 
 
     public void addSubtask(Subtask subtask) {
+        if (epics.get(subtask.getEpicId()) == null) {
+            return;
+        }
         subtask.setId(nextId++);
         subtasks.put(subtask.getId(), subtask);
         Epic epic = epics.get(subtask.getEpicId());
-        epic.subtasks.add(subtask.getId());
-        updEpicStatus(subtask.getEpicId());
+        epic.getSubtasks().add(subtask.getId());
+        updEpicStatus(epic);
     }
     public void updSubtask(Subtask subtask) {
+        if (!subtasks.containsKey(subtask.getId())) {
+            return; // можно здесь и в других случаях оставлять просто return или лучше будет сделать сам метод типа boolean?
+        } if (!Objects.equals(subtasks.get(subtask.getId()).getEpicId(), subtask.getEpicId())) {
+            return;
+        }
         subtasks.put(subtask.getId(), subtask);
-        updEpicStatus(subtask.getEpicId());
+        updEpicStatus(epics.get(subtask.getEpicId()));
     }
     public void rmvSubtasks() {
         subtasks.clear();
         for (Epic epic : epics.values()) {
-            epic.subtasks.clear();
-            epic.status = Status.NEW;
+            epic.rmvAllSubtasks();
+            updEpicStatus(epic);
         }
     }
 
@@ -96,7 +113,7 @@ public class TaskManager {
             tasks.remove(id);
         } else if (epics.containsKey(id)) {
             Epic epic = epics.get(id);
-            for (Integer subtaskId : epic.subtasks) {
+            for (Integer subtaskId : epic.getSubtasks()) {
                 subtasks.remove(subtaskId);
             }
             epics.remove(id);
@@ -104,8 +121,8 @@ public class TaskManager {
             Subtask subtask = subtasks.get(id);
             Epic epic = epics.get(subtask.getEpicId());
             subtasks.remove(id);
-            epic.subtasks.remove(Integer.valueOf(id));
-            updEpicStatus(epic.getId());
+            epic.rmvSubtaskById(id);
+            updEpicStatus(epic);
         } else {
             System.out.println("Отсутствует задача с таким ID.");
         }
@@ -122,8 +139,10 @@ public class TaskManager {
     public ArrayList<Subtask> getSubtasksListByEpicId(int epicId) {
         Epic epic = epics.get(epicId);
         ArrayList<Subtask> subtasksListByEpic = new ArrayList<>();
-        for (Integer id : epic.subtasks) {
-            subtasksListByEpic.add(subtasks.get(id));
+        if (epic != null) {
+            for (Integer id : epic.getSubtasks()) {
+                subtasksListByEpic.add(subtasks.get(id));
+            }
         }
         return subtasksListByEpic;
     }

@@ -4,8 +4,8 @@ public class Main {
     public static void main(String[] args) {
         taskManager = new TaskManager();
 
-        taskManager.addTask(new Task("name1", "dsc1"));
-        taskManager.addTask(new Task("name2", "dsc2"));
+        taskManager.addTask(new Task("name1", "dsc1", Status.NEW));
+        taskManager.addTask(new Task("name2", "dsc2", Status.NEW));
         System.out.println("Tasks:");
         for (Task task : taskManager.getTasksList()) {
             System.out.println(task);
@@ -18,9 +18,9 @@ public class Main {
             System.out.println(epic);
         }
 
-        taskManager.addSubtask(new Subtask("sbt1", "sbt dsc1", 1));
-        taskManager.addSubtask(new Subtask("sbt2", "sbt dsc2", 1));
-        taskManager.addSubtask(new Subtask("sbt3", "sbt dsc3", 3));
+        taskManager.addSubtask(new Subtask("sbt1", "sbt dsc1", Status.NEW,  1));
+        taskManager.addSubtask(new Subtask("sbt2", "sbt dsc2", Status.NEW, 1));
+        taskManager.addSubtask(new Subtask("sbt3", "sbt dsc3", Status.NEW, 3));
         System.out.println("Epic's subtasks ID=1");
         for (Subtask subtask : taskManager.getSubtasksListByEpicId(1)) {
             System.out.println(subtask);
@@ -30,12 +30,12 @@ public class Main {
             System.out.println(subtask);
         }
 
-        taskManager.updTask(new Task("new_name1", "new_dsc1"));
-        taskManager.updTask(new Task("new_name2", "new_dsc2"));
+        taskManager.updTask(new Task("new_name1", "new_dsc1", Status.IN_PROGRESS));
+        taskManager.updTask(new Task("new_name2", "new_dsc2", Status.DONE));
 
-        taskManager.updSubtask(new Subtask("new_sbt1", "sbt_dsc1", 1));
-        taskManager.updSubtask(new Subtask("new_sbt2", "sbt_dsc2", 1));
-        taskManager.updSubtask(new Subtask("new_sbt3", "sbt_dsc3", 3));
+        taskManager.updSubtask(new Subtask("new_sbt1", "sbt_dsc1", Status.IN_PROGRESS, 1));
+        taskManager.updSubtask(new Subtask("new_sbt2", "sbt_dsc2", Status.IN_PROGRESS, 1));
+        taskManager.updSubtask(new Subtask("new_sbt3", "sbt_dsc3", Status.DONE, 3));
 
         System.out.println("Updated Tasks:");
         for (Task task : taskManager.getTasksList()) {
