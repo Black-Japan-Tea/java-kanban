@@ -77,10 +77,11 @@ public class TaskManager {
         updEpicStatus(epic);
     }
     public void updSubtask(Subtask subtask) {
-        if (subtasks.containsKey(subtask.getId())) {
-        } if (Objects.equals(subtasks.get(subtask.getId()).getEpicId(), subtask.getEpicId())) {
-            subtasks.put(subtask.getId(), subtask);
-            updEpicStatus(epics.get(subtask.getEpicId()));
+        if (subtasks.containsKey(subtask.getId())) { // здесь понял сразу, просто когда удалял пустые return'ы, забыл скобку перенести вниз, чтобы один внутри другого был :D
+            if (Objects.equals(subtasks.get(subtask.getId()).getEpicId(), subtask.getEpicId())) {
+                subtasks.put(subtask.getId(), subtask);
+                updEpicStatus(epics.get(subtask.getEpicId()));
+            }
         }
     }
     public void rmvSubtasks() {
