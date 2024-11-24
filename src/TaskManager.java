@@ -21,10 +21,9 @@ public class TaskManager {
         tasks.put(task.getId(), task);
     }
     public void updTask(Task task) {
-        if (!tasks.containsKey(task.getId())) {
-            return;
+        if (tasks.containsKey(task.getId())) {
+            tasks.put(task.getId(), task);
         }
-        tasks.put(task.getId(), task);
     }
     public void rmvTasks() {
         tasks.clear();
@@ -36,15 +35,13 @@ public class TaskManager {
         epics.put(epic.getId(), epic);
     }
     public void updEpic(Epic epic) {
-        if (!epics.containsKey(epic.getId())) {
-            return;
+        if (epics.containsKey(epic.getId())) {
+            Epic uEpic = epics.get(epic.getId());
+            uEpic.setName(epic.getName());
+            uEpic.setDescription(epic.getDescription());
         }
-        Epic uEpic = epics.get(epic.getId());
-        uEpic.setName(epic.getName());
-        uEpic.setDescription(epic.getDescription());
     }
-    private void updEpicStatus(Epic epicId) {
-        Epic epic = epics.get(epicId);
+    private void updEpicStatus(Epic epic) {
         boolean isAllNew = true;
         boolean isAllDone = true;
         for (Integer subtaskId : epic.getSubtasks()) {
@@ -76,17 +73,15 @@ public class TaskManager {
         subtask.setId(nextId++);
         subtasks.put(subtask.getId(), subtask);
         Epic epic = epics.get(subtask.getEpicId());
-        epic.getSubtasks().add(subtask.getId());
+        epic.addSubtask(subtask.getEpicId());
         updEpicStatus(epic);
     }
     public void updSubtask(Subtask subtask) {
-        if (!subtasks.containsKey(subtask.getId())) {
-            return; // можно здесь и в других случаях оставлять просто return или лучше будет сделать сам метод типа boolean?
-        } if (!Objects.equals(subtasks.get(subtask.getId()).getEpicId(), subtask.getEpicId())) {
-            return;
+        if (subtasks.containsKey(subtask.getId())) {
+        } if (Objects.equals(subtasks.get(subtask.getId()).getEpicId(), subtask.getEpicId())) {
+            subtasks.put(subtask.getId(), subtask);
+            updEpicStatus(epics.get(subtask.getEpicId()));
         }
-        subtasks.put(subtask.getId(), subtask);
-        updEpicStatus(epics.get(subtask.getEpicId()));
     }
     public void rmvSubtasks() {
         subtasks.clear();
