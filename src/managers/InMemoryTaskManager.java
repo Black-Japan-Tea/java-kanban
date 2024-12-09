@@ -1,21 +1,21 @@
 package managers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.*;
 
 import tasks.*;
 
 public class InMemoryTaskManager implements TaskManager {
-    private final HashMap<Integer, Task> tasks = new HashMap<>();
-    private final HashMap<Integer, Epic> epics = new HashMap<>();
-    private final HashMap<Integer, Subtask> subtasks = new HashMap<>();
-
+    private final Map<Integer, Task> tasks;
+    private final Map<Integer, Epic> epics;
+    private final Map<Integer, Subtask> subtasks;
     private final HistoryManager historyManager;
     private Integer nextTaskId = 1;
 
-    public InMemoryTaskManager(InMemoryHistoryManager historyManager) {
-        this.historyManager = historyManager;
+    public InMemoryTaskManager() {
+        tasks = new HashMap<>();
+        epics = new HashMap<>();
+        subtasks = new HashMap<>();
+        historyManager = Managers.getDefaultHistory();
     }
 
     @Override
@@ -173,7 +173,7 @@ public class InMemoryTaskManager implements TaskManager {
             return false;
         }
         Epic epic = epics.get(id);
-        if (epic.getSubtasks().size() != 0) {
+        if (!epic.getSubtasks().isEmpty()) {
             for (Integer subtaskId : epic.getSubtasks()
             ) {
                 subtasks.remove(subtaskId);
@@ -181,6 +181,11 @@ public class InMemoryTaskManager implements TaskManager {
         }
         epics.remove(id);
         return true;
+    }
+
+    @Override
+    public List getHistory() {
+        return historyManager.getHistory();
     }
 
     @Override
@@ -228,7 +233,7 @@ public class InMemoryTaskManager implements TaskManager {
             }
 
         }
-        if (subtasks.size() == 0 || allNew) {
+        if (subtasks.isEmpty() || allNew) {
             epic.setStatus(Status.NEW);
             return;
         }

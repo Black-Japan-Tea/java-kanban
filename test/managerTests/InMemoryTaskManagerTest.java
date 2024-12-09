@@ -1,5 +1,6 @@
-package managers;
+package managerTests;
 
+import managers.InMemoryTaskManager;
 import tasks.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,8 +13,7 @@ class InMemoryTaskManagerTest {
     
     @BeforeEach
     void setUp() {
-        InMemoryHistoryManager inMemoryHistoryManager = new InMemoryHistoryManager();
-        taskManager = new InMemoryTaskManager(inMemoryHistoryManager);
+        taskManager = new InMemoryTaskManager();
 
         Task task1 = new Task("name1", "dsc1", Status.NEW);
         Task task2 = new Task("name2", "dsc2", Status.NEW);
