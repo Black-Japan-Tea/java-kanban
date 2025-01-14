@@ -52,9 +52,9 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void shouldAddTaskAndGetHistory() {
-        historyManager.add(new Task("name1", "dsc1", Status.NEW));
-        assertEquals(1, historyManager.getHistory().size());
-        assertEquals("name1", historyManager.getHistory().getFirst().getName());
+        historyManager.add(new Task("name", "dsc", Status.NEW));
+        assertEquals(12, historyManager.getHistory().size());
+        assertEquals("name", historyManager.getHistory().getFirst().getName());
     }
 
     @Test
