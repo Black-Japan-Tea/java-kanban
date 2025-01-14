@@ -4,7 +4,9 @@ import managers.InMemoryHistoryManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tasks.*;
+
 import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryHistoryManagerTest {
@@ -28,11 +30,11 @@ class InMemoryHistoryManagerTest {
         epic1.setId(7);
         Epic epic2 = new Epic("name", "dsc");
         epic2.setId(8);
-        Subtask subtask1 = new Subtask("name", "dsc",Status.NEW, 111);
+        Subtask subtask1 = new Subtask("name", "dsc", Status.NEW, 111);
         subtask1.setId(9);
-        Subtask subtask2 = new Subtask("name", "dsc",Status.NEW, 111);
+        Subtask subtask2 = new Subtask("name", "dsc", Status.NEW, 111);
         subtask2.setId(10);
-        Subtask subtask3 = new Subtask("name", "dsc",Status.NEW, 111);
+        Subtask subtask3 = new Subtask("name", "dsc", Status.NEW, 111);
         subtask3.setId(11);
 
         historyManager.add(task1);
@@ -73,11 +75,11 @@ class InMemoryHistoryManagerTest {
         epic1.setId(7);
         Epic epic2 = new Epic("name", "dsc");
         epic2.setId(8);
-        Subtask subtask1 = new Subtask("name", "dsc",Status.NEW, 999);
+        Subtask subtask1 = new Subtask("name", "dsc", Status.NEW, 999);
         subtask1.setId(9);
-        Subtask subtask2 = new Subtask("name", "dsc",Status.NEW, 999);
+        Subtask subtask2 = new Subtask("name", "dsc", Status.NEW, 999);
         subtask2.setId(10);
-        Subtask subtask3 = new Subtask("name", "dsc",Status.NEW, 999);
+        Subtask subtask3 = new Subtask("name", "dsc", Status.NEW, 999);
         subtask3.setId(11);
 
         ArrayList<Task> list = new ArrayList<>();

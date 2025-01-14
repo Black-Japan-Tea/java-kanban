@@ -38,44 +38,44 @@ public class Main {
             epicToUpdate1.addSubtask(taskManager.getSubtaskById(subId).getId());
         }
         System.out.println("Обновление эпика с id = " + epicToUpdate1.getId() + " Результат:"
-                                                                    + taskManager.updEpic(epicToUpdate1));
-        
+                + taskManager.updEpic(epicToUpdate1));
+
         printTasks(taskManager);
-        
+
         Task oldTask = taskManager.getTaskById(task1Id);
         Task taskToUpdate1 = new Task(oldTask.getName(),
-                                        oldTask.getDescription(),
-                                        Status.IN_PROGRESS);
+                oldTask.getDescription(),
+                Status.IN_PROGRESS);
         taskToUpdate1.setId(taskManager.getTaskById(task1Id).getId());
         System.out.println("Обновление задачи с id = " + taskToUpdate1.getId() + " Результат:"
-                                                                    + taskManager.updTask(taskToUpdate1));
+                + taskManager.updTask(taskToUpdate1));
 
 
         Subtask oldSubtask1 = taskManager.getSubtaskById(subtask1Id);
         Subtask subtaskToUpdate2 = new Subtask(oldSubtask1.getName(),
-                                                oldSubtask1.getDescription(),
-                                                Status.DONE,
-                                                oldSubtask1.getEpicId());
+                oldSubtask1.getDescription(),
+                Status.DONE,
+                oldSubtask1.getEpicId());
         subtaskToUpdate2.setId(oldSubtask1.getId());
         subtaskToUpdate2.setStatus(Status.DONE);
         System.out.println("Обновление подзадачи с id = " + subtaskToUpdate2.getId() + " Результат:"
-                                                                    + taskManager.updSubtask(subtaskToUpdate2));
+                + taskManager.updSubtask(subtaskToUpdate2));
         taskManager.updSubtask(subtaskToUpdate2);
 
         Subtask oldSubtask2 = taskManager.getSubtaskById(subtask3Id);
         Subtask subtaskToUpdate3 = new Subtask(oldSubtask2.getName(),
-                                        oldSubtask2.getDescription(),
-                                        Status.DONE,
-                                        oldSubtask2.getEpicId());
+                oldSubtask2.getDescription(),
+                Status.DONE,
+                oldSubtask2.getEpicId());
         subtaskToUpdate3.setId(oldSubtask2.getId());
         System.out.println("Обновление подзадачи с id = " + subtaskToUpdate3.getId() + " Результат:"
-                                                                    + taskManager.updSubtask(subtaskToUpdate3));
+                + taskManager.updSubtask(subtaskToUpdate3));
 
         printTasks(taskManager);
 
         System.out.println("История:");
         System.out.println(historyManager.getHistory());
-        
+
         System.out.println("Удаление подзадачи с id = " + subtask3Id + " Результат:" + taskManager.rmvSubtaskById(subtask3Id));
         System.out.println("Удаление задачи с id = " + task2Id + " Результат:" + taskManager.rmvTaskById(task2Id));
         System.out.println("Удаление эпика с id = " + epic1Id + " Результат:" + taskManager.rmvEpicById(epic1Id));
@@ -87,7 +87,7 @@ public class Main {
         taskManager.rmvAllEpics();
         System.out.println("Удаление всех эпиков");
         printTasks(taskManager);
-        
+
         System.out.println("Удаление всех типов задач");
         taskManager.rmvAllTypesOfTasks();
 

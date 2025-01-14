@@ -11,7 +11,7 @@ public class TaskTest {
     Task task1;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         task1 = new Task("name", "description", Status.NEW);
     }
 

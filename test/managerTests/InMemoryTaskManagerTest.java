@@ -4,13 +4,15 @@ import managers.InMemoryTaskManager;
 import tasks.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryTaskManagerTest {
 
     InMemoryTaskManager taskManager;
-    
+
     @BeforeEach
     void setUp() {
         taskManager = new InMemoryTaskManager();
@@ -22,7 +24,7 @@ class InMemoryTaskManagerTest {
         Epic epic1 = new Epic("epic1", "dsc1");
         Epic epic2 = new Epic("epic2", "dsc2");
 
-        taskManager.addTask(task1); 
+        taskManager.addTask(task1);
         taskManager.addTask(task2);
         taskManager.addTask(task3);
 
