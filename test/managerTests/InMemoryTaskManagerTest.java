@@ -37,7 +37,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void getTasks() {
+    void shouldGetTasks() {
         Task task1 = new Task("name1", "dsc1", Status.NEW);
         task1.setId(1);
         Task task2 = new Task("name2", "dsc2", Status.NEW);
@@ -54,7 +54,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void getEpics() {
+    void shouldGetEpics() {
         Epic epic1 = new Epic("epic1", "dsc1");
         epic1.setId(4);
         Epic epic2 = new Epic("epic2", "dsc2");
@@ -68,7 +68,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void getSubtasks() {
+    void shouldGetSubtasks() {
         Subtask subtask1 = new Subtask("sbt1", "dsc1", Status.NEW, 4);
         subtask1.setId(6);
         Subtask subtask2 = new Subtask("sbt2", "dsc2", Status.NEW, 4);
@@ -82,7 +82,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void rmvAllTypesOfTasks() {
+    void shouldRmvAllTypesOfTasks() {
         taskManager.rmvAllTypesOfTasks();
 
         ArrayList<Task> list1 = new ArrayList<>();
@@ -95,50 +95,49 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void rmvAllTasks() {
+    void shouldRmvAllTasks() {
         ArrayList<Task> list1 = new ArrayList<>();
         taskManager.rmvAllTasks();
         assertEquals(list1, taskManager.getTasks());
     }
 
     @Test
-    void rmvAllEpics() {
+    void shouldRmvAllEpics() {
         ArrayList<Epic> list2 = new ArrayList<>();
         taskManager.rmvAllEpics();
         assertEquals(list2, taskManager.getEpics());
     }
 
     @Test
-    void rmvAllSubtasks() {
+    void shouldRmvAllSubtasks() {
         ArrayList<Subtask> list3 = new ArrayList<>();
         taskManager.rmvAllSubtasks();
         assertEquals(list3, taskManager.getSubtasks());
     }
 
     @Test
-    void getTaskById() {
+    void shouldGetTaskById() {
         Task task1 = new Task("name", "dsc", Status.NEW);
         task1.setId(1);
         assertEquals(task1, taskManager.getTaskById(1));
     }
 
     @Test
-    void getSubtaskById() {
+    void shouldGetSubtaskById() {
         Subtask subtask1 = new Subtask("name", "dsc", Status.NEW, 4);
         subtask1.setId(6);
         assertEquals(subtask1, taskManager.getSubtaskById(6));
     }
 
     @Test
-    void getEpicById() {
+    void shouldGetEpicById() {
         Epic epic1 = new Epic("name", "dsc");
         epic1.setId(4);
         assertEquals(epic1, taskManager.getEpicById(4));
     }
 
-
     @Test
-    void updTask() {
+    void shouldUpdTask() {
         Task task1 = new Task("new name", "new  dsc", Status.DONE);
         task1.setId(1);
 
@@ -147,7 +146,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void updEpic() {
+    void shouldUpdEpic() {
         Epic epic1 = new Epic("new name", "new  dsc");
         epic1.setId(4);
         taskManager.updEpic(epic1);
@@ -155,7 +154,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void updSubtask() {
+    void shouldUpdSubtask() {
         Subtask subtask1 = new Subtask("new name", " new dsc", Status.DONE, 4);
         subtask1.setId(6);
         taskManager.updSubtask(subtask1);
@@ -164,7 +163,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void rmvTaskById() {
+    void shouldRmvTaskById() {
         Task task1 = new Task("name", "dsc", Status.NEW);
         task1.setId(1);
         Task task2 = new Task("name", "dsc", Status.NEW);
@@ -181,7 +180,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void rmvEpicById() {
+    void shouldRmvEpicById() {
         Epic epic1 = new Epic("name", "dsc");
         epic1.setId(4);
 
@@ -194,7 +193,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void rmvSubtaskById() {
+    void shouldRmvSubtaskById() {
         Subtask subtask1 = new Subtask("sbt", "dsc", Status.NEW, 4);
         subtask1.setId(6);
 
@@ -207,7 +206,7 @@ class InMemoryTaskManagerTest {
     }
 
     @Test
-    void getSubtaskByEpic() {
+    void shouldGetSubtaskByEpic() {
         Subtask subtask1 = new Subtask("name", "dsc", Status.NEW, 4);
         subtask1.setId(6);
         Subtask subtask2 = new Subtask("name", "dsc", Status.NEW, 4);
