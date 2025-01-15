@@ -66,6 +66,9 @@ public class InMemoryTaskManager implements TaskManager {
         for (Integer id : epics.keySet()) {
             historyManager.rmv(id);
         }
+        for (Integer id : subtasks.keySet()) {
+            historyManager.rmv(id);
+        }
         epics.clear();
         subtasks.clear();
     }
