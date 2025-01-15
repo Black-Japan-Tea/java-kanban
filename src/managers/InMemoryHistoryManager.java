@@ -82,7 +82,7 @@ public class InMemoryHistoryManager implements HistoryManager {
         return tasks;
     }
 
-    void linkLastNode(Node newNode) {
+    private void linkLastNode(Node newNode) {
         if (lastId != null) {
             Node prevNode = historyMap.get(lastId);
             prevNode.setNextNode(newNode);
