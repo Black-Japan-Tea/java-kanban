@@ -10,7 +10,7 @@ class SubtaskTest {
     Subtask subtask;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         subtask = new Subtask("name", "description", Status.NEW, 1);
     }
 

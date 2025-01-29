@@ -38,19 +38,37 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public void rmvAllTypesOfTasks() {
+        for (Integer id : tasks.keySet()) {
+            historyManager.rmv(id);
+        }
+        for (Integer id : subtasks.keySet()) {
+            historyManager.rmv(id);
+        }
+        for (Integer id : epics.keySet()) {
+            historyManager.rmv(id);
+        }
         tasks.clear();
-        epics.clear();
         subtasks.clear();
+        epics.clear();
         nextTaskId = 0;
     }
 
     @Override
     public void rmvAllTasks() {
+        for (Integer id : tasks.keySet()) {
+            historyManager.rmv(id);
+        }
         tasks.clear();
     }
 
     @Override
     public void rmvAllEpics() {
+        for (Integer id : epics.keySet()) {
+            historyManager.rmv(id);
+        }
+        for (Integer id : subtasks.keySet()) {
+            historyManager.rmv(id);
+        }
         epics.clear();
         subtasks.clear();
     }
@@ -61,6 +79,9 @@ public class InMemoryTaskManager implements TaskManager {
         ) {
             epic.rmvAllSubtasks();
             refreshEpicStatus(epic);
+        }
+        for (Integer id : subtasks.keySet()) {
+            historyManager.rmv(id);
         }
         subtasks.clear();
     }
@@ -164,6 +185,7 @@ public class InMemoryTaskManager implements TaskManager {
             return false;
         }
         tasks.remove(id);
+        historyManager.rmv(id);
         return true;
     }
 
@@ -177,9 +199,11 @@ public class InMemoryTaskManager implements TaskManager {
             for (Integer subtaskId : epic.getSubtasks()
             ) {
                 subtasks.remove(subtaskId);
+                historyManager.rmv(subtaskId);
             }
         }
         epics.remove(id);
+        historyManager.rmv(id);
         return true;
     }
 
@@ -196,6 +220,7 @@ public class InMemoryTaskManager implements TaskManager {
 
         Subtask subtask = subtasks.get(id);
         subtasks.remove(id);
+        historyManager.rmv(id);
         Epic subtaskEpic = getEpicById(subtask.getEpicId());
         subtaskEpic.rmvSubtaskById(id);
         refreshEpicStatus(subtaskEpic);
