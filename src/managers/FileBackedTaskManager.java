@@ -42,12 +42,12 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
             strToSave.add(taskToString(task, Type.TASK) + "\n");
         }
 
-        for (Subtask subtask : super.getSubtasks()) {
-            strToSave.add(subtaskToString(subtask) + "\n");
-        }
-
         for (Epic epic : super.getEpics()) {
             strToSave.add(taskToString(epic, Type.EPIC) + "\n");
+        }
+
+        for (Subtask subtask : super.getSubtasks()) {
+            strToSave.add(subtaskToString(subtask) + "\n");
         }
 
         try (Writer writer = new FileWriter(this.file, StandardCharsets.UTF_8, false)) {

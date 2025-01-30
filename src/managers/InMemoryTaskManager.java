@@ -273,8 +273,11 @@ public class InMemoryTaskManager implements TaskManager {
         tasks.put(task.getId(), task);
     }
 
-    protected void loadSubtask(Subtask subTask) {
-        subtasks.put(subTask.getId(), subTask);
+    protected void loadSubtask(Subtask subtask) {
+        subtasks.put(subtask.getId(), subtask);
+        Epic epic = epics.get(subtask.getEpicId());
+        epic.addSubtask(subtask.getId());
+        refreshEpicStatus(epic);
     }
 
     protected void loadEpic(Epic epic) {
