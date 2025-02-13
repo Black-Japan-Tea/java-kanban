@@ -47,4 +47,6 @@ public interface TaskManager {
     boolean rmvEpicById(Integer id);
 
     List getHistory();
+
+    List<Task> getPrioritizedTasks();
 }

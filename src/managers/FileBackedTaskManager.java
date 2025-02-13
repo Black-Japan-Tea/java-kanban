@@ -4,6 +4,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.nio.charset.StandardCharsets;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 import exceptions.*;
 import tasks.*;
@@ -36,7 +38,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
             }
         }
 
-        strToSave.add("id,type,name,status,description,epic\n");
+        strToSave.add("id,type,name,status,description,epic,duration,startTime\n");
 
         for (Task task : super.getTasks()) {
             strToSave.add(taskToString(task, Type.TASK) + "\n");
@@ -77,7 +79,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
         return sb.toString();
     }
 
-    private void loadFromFile(File file) {
+    public void loadFromFile(File file) {
 
         if (!file.exists()) {
             return;
@@ -102,13 +104,14 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
 
         int id = Integer.parseInt(items[0]);
         Type type = Type.valueOf(items[1]);
-        String title = items[2];
+        String name = items[2];
         Status status = Status.valueOf(items[3]);
         String description = items[4];
         Integer subtasksEpic = null;
-        if (items.length > 5) {
+        Duration duration = Duration.ofMinutes(Integer.parseInt(items[6]));
+        LocalDateTime startTime = LocalDateTime.parse(items[7]);
+        if (items.length > 7) {
             subtasksEpic = Integer.valueOf(items[5]);
-
         }
         if (id > super.getLastId()) {
             super.setLastId(id);
@@ -116,20 +119,20 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
 
         switch (type) {
             case TASK: {
-                Task task = new Task(title, description, status);
+                Task task = new Task(name, description, status, duration, startTime);
                 task.setId(id);
                 super.loadTask(task);
                 return true;
             }
             case SUBTASK: {
-                Subtask subtask = new Subtask(title, description, status, subtasksEpic);
+                Subtask subtask = new Subtask(name, description, status, subtasksEpic, duration, startTime);
                 subtask.setId(id);
                 super.loadSubtask(subtask);
                 loadedSubtasks.add(subtask);
                 return true;
             }
             case EPIC: {
-                Epic epic = new Epic(title, description);
+                Epic epic = new Epic(name, description);
                 epic.setId(id);
                 epic.setStatus(status);
                 super.loadEpic(epic);
