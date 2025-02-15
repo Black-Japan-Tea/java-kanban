@@ -14,9 +14,9 @@ import static managers.Managers.getDefault;
 public class Main {
 
     public static void main(String[] args) {
-                createTask();
-                addTaskToFile();
-                loadTaskFromFile();
+        createTask();
+        addTaskToFile();
+        loadTaskFromFile();
     }
 
     private static void loadTaskFromFile() {
