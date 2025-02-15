@@ -1,31 +1,21 @@
 package manager_tests;
 
-import managers.InMemoryHistoryManager;
-import managers.InMemoryTaskManager;
+import managers.HistoryManager;
 import managers.Managers;
+import managers.TaskManager;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ManagersTest {
-
-    InMemoryHistoryManager inMemoryHistoryManager;
-
-    @BeforeEach
-    void setUp() {
-        inMemoryHistoryManager = new InMemoryHistoryManager();
+    @Test
+    void shouldReturnTaskManager() {
+        TaskManager taskManager = Managers.getDefault();
+        Assertions.assertNotNull(taskManager);
     }
 
     @Test
-    void shouldGetDefault() {
-        InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
-        Assertions.assertEquals(inMemoryTaskManager.getClass(), Managers.getDefault().getClass());
-    }
-
-    @Test
-    void shouldGetHistory() {
-        assertEquals(inMemoryHistoryManager.getClass(), Managers.getDefaultHistory().getClass());
+    void shouldReturnHistoryManager() {
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        Assertions.assertNotNull(historyManager);
     }
 }

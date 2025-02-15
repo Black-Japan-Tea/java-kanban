@@ -1,34 +1,24 @@
 package tasks;
 
-import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
-
 public class Epic extends Task {
-    private List<Subtask> subtasksEpic = new ArrayList<>();
-    private List<Integer> subtasks = new ArrayList<>();
+
+    private final ArrayList<Integer> subtasks;
+    private LocalDateTime endTime;
 
     public Epic(String name, String description) {
-        super(name, description, Status.NEW);
-        setDuration(Duration.ofMinutes(0));
-        setStartTime(LocalDateTime.MIN);
+        super(name, description, Status.NEW, null, null);
+        this.subtasks = new ArrayList<>();
     }
 
     @Override
     public LocalDateTime getEndTime() {
-        LocalDateTime endTime;
-        if (subtasksEpic.isEmpty()) {
-            endTime = startTime;
-        } else {
-            endTime = subtasksEpic.getFirst().getStartTime().plus(subtasksEpic.getFirst().getDuration());
-        }
-        for (Subtask subtask : subtasksEpic) {
-            if (subtask.getStartTime().plus(duration).isAfter(endTime)) {
-                endTime = subtask.getStartTime().plus(duration);
-            }
-        }
         return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
     }
 
     public void rmvSubtaskById(Integer subtaskId) {
@@ -39,15 +29,11 @@ public class Epic extends Task {
         subtasks.clear();
     }
 
-    public void addSubtask(Integer subtaskId) {
-        subtasks.add(subtaskId);
+    public void addSubtask(Subtask subtask) {
+        subtasks.add(subtask.id);
     }
 
     public ArrayList<Integer> getSubtasks() {
         return new ArrayList<>(subtasks);
-    }
-
-    public List<Subtask> getSubtasksEpic() {
-        return subtasksEpic;
     }
 }
