@@ -1,7 +1,9 @@
 package managers;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
@@ -79,7 +81,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
         return sb.toString();
     }
 
-    public void loadFromFile(File file) {
+    private void loadFromFile(File file) {
 
         if (!file.exists()) {
             return;
@@ -167,21 +169,24 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
     }
 
     @Override
-    public void addTask(Task newTask) {
-        super.addTask(newTask);
+    public int addTask(Task newTask) {
+        int r = super.addTask(newTask);
         save();
+        return r;
     }
 
     @Override
-    public void addEpic(Epic newEpic) {
-        super.addEpic(newEpic);
+    public int addEpic(Epic newEpic) {
+        int r = super.addEpic(newEpic);
         save();
+        return r;
     }
 
     @Override
-    public void addSubtask(Subtask newSubtask) {
-        super.addSubtask(newSubtask);
+    public int addSubtask(Subtask newSubtask) {
+        int r = super.addSubtask(newSubtask);
         save();
+        return r;
     }
 
     @Override

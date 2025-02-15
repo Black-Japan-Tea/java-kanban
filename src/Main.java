@@ -42,8 +42,6 @@ public class Main {
                 localDateTime);
         final int idSubtask3 = subtask3.getId();
 
-        printAllTasks(manager);
-
         System.out.println(" ");
         System.out.println(" ");
 
@@ -179,6 +177,8 @@ public class Main {
         System.out.println(taskManager.getSubtasks());
         taskManager.rmvSubtaskById(newSubtask1.getId());
         System.out.println(taskManager.getSubtasks());
+
+        printAllTasks(manager);
     }
 
     private static void printAllTasks(TaskManager manager) {

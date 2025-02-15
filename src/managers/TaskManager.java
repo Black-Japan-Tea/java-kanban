@@ -3,14 +3,15 @@ package managers;
 import tasks.*;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TaskManager {
 
     List<Task> getTasks();
 
-    Task getTaskById(Integer id);
+    Optional<Task> getTaskById(Integer id);
 
-    void addTask(Task newTask);
+    int addTask(Task newTask);
 
     boolean updTask(Task task);
 
@@ -20,9 +21,9 @@ public interface TaskManager {
 
     List<Subtask> getSubtasks();
 
-    Subtask getSubtaskById(Integer id);
+    Optional<Subtask> getSubtaskById(Integer id);
 
-    void addSubtask(Subtask newSubtask);
+    int addSubtask(Subtask newSubtask);
 
     void rmvAllSubtasks();
 
@@ -38,9 +39,9 @@ public interface TaskManager {
 
     void rmvAllEpics();
 
-    Epic getEpicById(Integer id);
+    Optional<Epic> getEpicById(Integer id);
 
-    void addEpic(Epic newEpic);
+    int addEpic(Epic newEpic);
 
     boolean updEpic(Epic epic);
 

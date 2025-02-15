@@ -1,16 +1,20 @@
-package managerTests;
+package manager_tests;
 
 import managers.InMemoryHistoryManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tasks.*;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryHistoryManagerTest {
     InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
+    Duration duration = Duration.ofMinutes(25);
+    LocalDateTime startTime = LocalDateTime.now();
 
     @BeforeEach
     void fillTasks() {
@@ -30,11 +34,11 @@ class InMemoryHistoryManagerTest {
         epic1.setId(7);
         Epic epic2 = new Epic("name", "dsc");
         epic2.setId(8);
-        Subtask subtask1 = new Subtask("name", "dsc", Status.NEW, 111);
+        Subtask subtask1 = new Subtask("name", "dsc", Status.NEW, 111, duration, startTime);
         subtask1.setId(9);
-        Subtask subtask2 = new Subtask("name", "dsc", Status.NEW, 111);
+        Subtask subtask2 = new Subtask("name", "dsc", Status.NEW, 111, duration, startTime);
         subtask2.setId(10);
-        Subtask subtask3 = new Subtask("name", "dsc", Status.NEW, 111);
+        Subtask subtask3 = new Subtask("name", "dsc", Status.NEW, 111, duration, startTime);
         subtask3.setId(11);
 
         historyManager.add(task1);
@@ -75,11 +79,11 @@ class InMemoryHistoryManagerTest {
         epic1.setId(7);
         Epic epic2 = new Epic("name", "dsc");
         epic2.setId(8);
-        Subtask subtask1 = new Subtask("name", "dsc", Status.NEW, 999);
+        Subtask subtask1 = new Subtask("name", "dsc", Status.NEW, 999, duration, startTime);
         subtask1.setId(9);
-        Subtask subtask2 = new Subtask("name", "dsc", Status.NEW, 999);
+        Subtask subtask2 = new Subtask("name", "dsc", Status.NEW, 999, duration, startTime);
         subtask2.setId(10);
-        Subtask subtask3 = new Subtask("name", "dsc", Status.NEW, 999);
+        Subtask subtask3 = new Subtask("name", "dsc", Status.NEW, 999, duration, startTime);
         subtask3.setId(11);
 
         ArrayList<Task> list = new ArrayList<>();

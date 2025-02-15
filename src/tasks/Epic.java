@@ -7,22 +7,12 @@ import java.util.List;
 
 public class Epic extends Task {
     private List<Subtask> subtasksEpic = new ArrayList<>();
-    private ArrayList<Integer> subtasks;
+    private List<Integer> subtasks = new ArrayList<>();
 
     public Epic(String name, String description) {
         super(name, description, Status.NEW);
         setDuration(Duration.ofMinutes(0));
         setStartTime(LocalDateTime.MIN);
-    }
-
-    @Override
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    @Override
-    public Duration getDuration() {
-        return duration;
     }
 
     @Override
@@ -57,24 +47,24 @@ public class Epic extends Task {
         return new ArrayList<>(subtasks);
     }
 
-    public void setAllSubtasks(List<Subtask> newSubtasksEpic) {
-        duration = Duration.ofMinutes(0);
-        this.subtasksEpic = newSubtasksEpic;
-        searchStartTime();
-        newSubtasksEpic.stream()
-                .peek(subtask -> duration = Duration.ofMinutes(subtask.duration.toMinutes() + duration.toMinutes()))
-                .findFirst();
-    }
-
-    private void searchStartTime() {
-        LocalDateTime minTime = getEndTime();
-        for (Subtask subtask : subtasksEpic) {
-            if (subtask.getStartTime().isBefore(minTime)) {
-                minTime = subtask.getStartTime();
-            }
-        }
-        startTime = minTime;
-    }
+//    public void setAllSubtasks(List<Subtask> newSubtasksEpic) {
+//        duration = Duration.ofMinutes(0);
+//        this.subtasksEpic = newSubtasksEpic;
+//        searchStartTime();
+//        newSubtasksEpic.stream()
+//                .peek(subtask -> duration = Duration.ofMinutes(subtask.duration.toMinutes() + duration.toMinutes()))
+//                .findFirst();
+//    }
+//
+//    private void searchStartTime() {
+//        LocalDateTime minTime = getEndTime();
+//        for (Subtask subtask : subtasksEpic) {
+//            if (subtask.getStartTime().isBefore(minTime)) {
+//                minTime = subtask.getStartTime();
+//            }
+//        }
+//        startTime = minTime;
+//    }
 
     public List<Subtask> getSubtasksEpic() {
         return subtasksEpic;
