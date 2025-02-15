@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Assertions;
 import tasks.Epic;
 import tasks.Status;
 import tasks.Subtask;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 
@@ -27,8 +28,10 @@ class SubtaskTest {
     @Test
     public void shouldBeEqualToEachOtherIfTheirIdsEqual() {
         Epic epic1 = new Epic("name1", "dsc1");
-        Subtask subtask1 = new Subtask("Subtask1", "DSubtask1", Status.NEW, epic1.getId(), duration, startTime);
-        Subtask subtask2 = new Subtask("Subtask2", "DSubtask2", Status.NEW, epic1.getId(), duration, startTime);
+        Subtask subtask1 = new Subtask("Subtask1", "DSubtask1", Status.NEW, epic1.getId(),
+                duration, startTime);
+        Subtask subtask2 = new Subtask("Subtask2", "DSubtask2", Status.NEW, epic1.getId(),
+                duration, startTime);
         subtask1.setId(1);
         subtask2.setId(1);
 

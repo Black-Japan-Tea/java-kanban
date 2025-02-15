@@ -168,9 +168,11 @@ abstract class TaskManagerTest<T extends TaskManager> {
 
     @Test
     void getSubtasks() {
-        Subtask subTask1 = new Subtask("title", "description", Status.NEW, 4, duration, startTime);
+        Subtask subTask1 = new Subtask("title", "description", Status.NEW, 4,
+                duration, startTime);
         subTask1.setId(6);
-        Subtask subTask2 = new Subtask("title", "description", Status.NEW, 4, duration, startTime);
+        Subtask subTask2 = new Subtask("title", "description", Status.NEW, 4,
+                duration, startTime);
         subTask2.setId(7);
 
         ArrayList<Subtask> list = new ArrayList<>();
@@ -222,7 +224,8 @@ abstract class TaskManagerTest<T extends TaskManager> {
 
     @Test
     void getSubtaskById() {
-        Subtask subTask1 = new Subtask("title", "description", Status.NEW, 4, duration, startTime);
+        Subtask subTask1 = new Subtask("title", "description", Status.NEW, 4,
+                duration, startTime);
         subTask1.setId(6);
         assertEquals(subTask1, taskManager.getSubtaskById(6).get());
     }
@@ -254,7 +257,8 @@ abstract class TaskManagerTest<T extends TaskManager> {
 
     @Test
     void updSubtask() {
-        Subtask subTask1 = new Subtask("new title", " new description", Status.DONE, 4, duration, startTime);
+        Subtask subTask1 = new Subtask("new title", " new description", Status.DONE, 4,
+                duration, startTime);
         subTask1.setId(6);
         taskManager.updSubtask(subTask1);
         assertEquals(subTask1, taskManager.getSubtaskById(6).get());
@@ -293,7 +297,8 @@ abstract class TaskManagerTest<T extends TaskManager> {
 
     @Test
     void rmvSubtaskById() {
-        Subtask subTask1 = new Subtask("title", "description", Status.NEW, 4, duration, startTime);
+        Subtask subTask1 = new Subtask("title", "description", Status.NEW, 4,
+                duration, startTime);
         subTask1.setId(6);
 
         ArrayList<Subtask> list = new ArrayList<>();
@@ -306,9 +311,11 @@ abstract class TaskManagerTest<T extends TaskManager> {
 
     @Test
     void getSubtaskByEpic() {
-        Subtask subTask1 = new Subtask("title", "description", Status.NEW, 4, duration, startTime);
+        Subtask subTask1 = new Subtask("title", "description", Status.NEW, 4,
+                duration, startTime);
         subTask1.setId(6);
-        Subtask subTask2 = new Subtask("title", "description", Status.NEW, 4, duration, startTime);
+        Subtask subTask2 = new Subtask("title", "description", Status.NEW, 4,
+                duration, startTime);
         subTask2.setId(7);
 
         ArrayList<Subtask> list = new ArrayList<>();

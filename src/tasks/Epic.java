@@ -47,25 +47,6 @@ public class Epic extends Task {
         return new ArrayList<>(subtasks);
     }
 
-//    public void setAllSubtasks(List<Subtask> newSubtasksEpic) {
-//        duration = Duration.ofMinutes(0);
-//        this.subtasksEpic = newSubtasksEpic;
-//        searchStartTime();
-//        newSubtasksEpic.stream()
-//                .peek(subtask -> duration = Duration.ofMinutes(subtask.duration.toMinutes() + duration.toMinutes()))
-//                .findFirst();
-//    }
-//
-//    private void searchStartTime() {
-//        LocalDateTime minTime = getEndTime();
-//        for (Subtask subtask : subtasksEpic) {
-//            if (subtask.getStartTime().isBefore(minTime)) {
-//                minTime = subtask.getStartTime();
-//            }
-//        }
-//        startTime = minTime;
-//    }
-
     public List<Subtask> getSubtasksEpic() {
         return subtasksEpic;
     }
