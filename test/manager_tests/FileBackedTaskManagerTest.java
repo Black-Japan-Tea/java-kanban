@@ -15,14 +15,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskManager> {
 
-    protected File fileTest = new File("test.cvs");
+    protected File test = new File("test.cvs");
     protected FileBackedTaskManager fileBackedTaskManager;
     Duration duration = Duration.ofMinutes(10);
     LocalDateTime startTime = LocalDateTime.of(2000, 1, 1, 0, 1);
 
     @BeforeEach
     void beforeEach() {
-        fileBackedTaskManager = new FileBackedTaskManager(fileTest);
+        fileBackedTaskManager = new FileBackedTaskManager(test);
     }
 
     @Override
@@ -45,13 +45,13 @@ public class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskMan
         fileBackedTaskManager.addSubtask(subtask1);
         fileBackedTaskManager.addSubtask(subtask2);
 
-        Assertions.assertTrue(fileTest.exists());
-        Assertions.assertTrue(fileTest.length() > 0);
+        Assertions.assertTrue(test.exists());
+        Assertions.assertTrue(test.length() > 0);
     }
 
     @Test
-    void shouldLoadFromFile() {
-        fileBackedTaskManager = FileBackedTaskManager.loadFromFile(fileTest);
+    void shouldLoadingFromFile() {
+        fileBackedTaskManager = FileBackedTaskManager.loadFromFile(test);
 
         Assertions.assertTrue(fileBackedTaskManager.getTasks().isEmpty());
         Assertions.assertTrue(fileBackedTaskManager.getEpics().isEmpty());
@@ -59,8 +59,8 @@ public class FileBackedTaskManagerTest extends TaskManagerTest<FileBackedTaskMan
     }
 
     @Test
-    void shouldThrowExceptionForNonExistentFile() {
-        File nonExistentFile = new File("test.cvs");
-        assertThrows(RuntimeException.class, () -> FileBackedTaskManager.loadFromFile(nonExistentFile));
+    void shouldThrowExceptionForNonExistentFile() throws RuntimeException {
+        File nonExistFile = new File("testFile.cvs");
+        assertThrows(RuntimeException.class, () -> FileBackedTaskManager.loadFromFile(nonExistFile));
     }
 }

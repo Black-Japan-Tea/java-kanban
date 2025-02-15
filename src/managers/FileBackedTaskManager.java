@@ -13,9 +13,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager implements TaskMa
     private ArrayList<Subtask> loadedSubtasks = new ArrayList<>();
 
     public FileBackedTaskManager(File file) {
-        super();
         this.file = file;
-        loadFromFile(this.file);
     }
 
     @Override
