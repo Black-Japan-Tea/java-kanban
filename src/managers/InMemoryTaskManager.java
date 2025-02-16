@@ -272,8 +272,9 @@ public class InMemoryTaskManager implements TaskManager {
                 .sum();
         if (durationEpic == 0) {
             epic.setDuration(null);
+        } else {
+            epic.setDuration(Duration.ofMinutes(durationEpic));
         }
-        epic.setDuration(Duration.ofMinutes(durationEpic));
 
         LocalDateTime startTime = subtasksByEpic.stream()
                 .map(Task::getStartTime)
