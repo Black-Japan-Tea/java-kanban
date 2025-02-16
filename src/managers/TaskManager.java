@@ -48,9 +48,5 @@ public interface TaskManager {
 
     List<Task> getHistory();
 
-    void updEpicsStartTimeAndDuration(Epic epic);
-
-    void addPrioritizedTasks(Task task);
-
     TreeSet<Task> getPrioritizedTasks();
 }

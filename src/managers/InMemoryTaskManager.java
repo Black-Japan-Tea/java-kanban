@@ -257,14 +257,22 @@ public class InMemoryTaskManager implements TaskManager {
         return prioritizedTasks;
     }
 
-    @Override
-    public void updEpicsStartTimeAndDuration(Epic epic) {
+    protected void addPrioritizedTasks(Task task) {
+        if (task.getStartTime() != null) {
+            getPrioritizedTasks().add(task);
+        }
+    }
+
+    protected void updEpicsStartTimeAndDuration(Epic epic) {
         Collection<Subtask> subtasksByEpic = getSubtaskByEpicId(epic);
         long durationEpic = subtasksByEpic.stream()
                 .map(Task::getDuration)
                 .filter(Objects::nonNull)
                 .mapToLong(Duration::toMinutes)
                 .sum();
+        if (durationEpic == 0) {
+            epic.setDuration(null);
+        }
         epic.setDuration(Duration.ofMinutes(durationEpic));
 
         LocalDateTime startTime = subtasksByEpic.stream()
@@ -280,13 +288,6 @@ public class InMemoryTaskManager implements TaskManager {
                 .max(LocalDateTime::compareTo)
                 .orElse(null);
         epic.setEndTime(endTime);
-    }
-
-    @Override
-    public void addPrioritizedTasks(Task task) {
-        if (task.getStartTime() != null) {
-            getPrioritizedTasks().add(task);
-        }
     }
 
     protected void setNextTaskId(int nextTaskId) {
