@@ -1,0 +1,5 @@
+id,type,name,status,description,epic,duration,startTime,endTime
+1,TASK,Покормить кота,NEW,Насыпать корм в миску,10,2000-01-01T00:01,2000-01-01T00:11
+2,EPIC,epicName,NEW,epicDsc,PT20M,2000-01-01T01:41,2000-01-01T03:31
+3,SUBTASK,subtaskName1,NEW,subtaskDsc1,2,10,2000-01-01T01:41,2000-01-01T01:51
+4,SUBTASK,subtaskName2,NEW,subtaskDsc2,2,10,2000-01-01T03:21,2000-01-01T03:31

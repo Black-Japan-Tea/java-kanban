@@ -1,10 +1,23 @@
 package tasks;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public class Task {
     protected int id;
     protected String name;
     protected String description;
     protected Status status;
+    protected Duration duration;
+    protected LocalDateTime startTime;
+
+    public Task(String name, String description, Status status, Duration duration, LocalDateTime startTime) {
+        this.name = name;
+        this.description = description;
+        this.status = status;
+        this.duration = duration;
+        this.startTime = startTime;
+    }
 
     public Task(String name, String description, Status status) {
         this.name = name;
@@ -12,21 +25,14 @@ public class Task {
         this.status = status;
     }
 
-    public Task(String name, String description, Status status, int id) {
-        this.name = name;
-        this.description = description;
-        this.status = status;
-        this.id = id;
-    }
-
 
     @Override
     public String toString() {
-        return "Task{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", status=" + status +
+        return "Задача {" +
+                "id = " + id +
+                ", название =" + name + '\'' +
+                ", описание = " + description + '\'' +
+                ", статус = " + status +
                 '}';
     }
 
@@ -82,5 +88,28 @@ public class Task {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public LocalDateTime getEndTime() {
+        if (startTime != null) {
+            return startTime.plus(duration);
+        }
+        return null;
+    }
+
+    public Duration getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Duration duration) {
+        this.duration = duration;
+    }
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
     }
 }

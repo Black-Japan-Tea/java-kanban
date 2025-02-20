@@ -3,48 +3,50 @@ package managers;
 import tasks.*;
 
 import java.util.List;
+import java.util.TreeSet;
 
 public interface TaskManager {
+    int addTask(Task task);
+
+    int addEpic(Epic epic);
+
+    int addSubtask(Subtask subtask);
 
     List<Task> getTasks();
 
-    Task getTaskById(Integer id);
-
-    void addTask(Task newTask);
-
-    boolean updTask(Task task);
-
-    boolean rmvTaskById(Integer id);
-
-    void rmvAllTasks();
+    List<Epic> getEpics();
 
     List<Subtask> getSubtasks();
 
-    Subtask getSubtaskById(Integer id);
+    void refreshEpicStatus(Epic epic);
 
-    void addSubtask(Subtask newSubtask);
+    Task getTaskById(int id);
+
+    Subtask getSubtaskById(int id);
+
+    Epic getEpicById(int id);
+
+    void rmvAllTasks();
 
     void rmvAllSubtasks();
 
-    boolean updSubtask(Subtask subtask);
-
-    boolean rmvSubtaskById(Integer id);
-
-    List<Subtask> getSubtaskByEpicId(int epicId);
-
-    List<Epic> getEpics();
-
-    void rmvAllTypesOfTasks();
-
     void rmvAllEpics();
 
-    Epic getEpicById(Integer id);
+    void updTask(Task newTask);
 
-    void addEpic(Epic newEpic);
+    void updEpic(Epic newEpic);
 
-    boolean updEpic(Epic epic);
+    void updSubtask(Subtask newSubtask);
 
-    boolean rmvEpicById(Integer id);
+    void rmvTaskById(int id);
 
-    List getHistory();
+    void rmvEpicById(int id);
+
+    void rmvSubtaskById(int id);
+
+    List<Subtask> getSubtaskByEpicId(Epic epic);
+
+    List<Task> getHistory();
+
+    TreeSet<Task> getPrioritizedTasks();
 }

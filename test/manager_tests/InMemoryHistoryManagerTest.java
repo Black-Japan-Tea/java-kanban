@@ -1,40 +1,44 @@
-package managerTests;
+package manager_tests;
 
 import managers.InMemoryHistoryManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tasks.*;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryHistoryManagerTest {
     InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
+    Duration duration = Duration.ofMinutes(25);
+    LocalDateTime startTime = LocalDateTime.now();
 
     @BeforeEach
     void fillTasks() {
-        Task task1 = new Task("name", "dsc", Status.NEW);
+        Task task1 = new Task("name1", "dsc1", Status.NEW);
         task1.setId(1);
-        Task task2 = new Task("name", "dsc", Status.NEW);
+        Task task2 = new Task("name2", "dsc2", Status.NEW);
         task2.setId(2);
-        Task task3 = new Task("name", "dsc", Status.NEW);
+        Task task3 = new Task("name3", "dsc3", Status.NEW);
         task3.setId(3);
-        Task task4 = new Task("name", "dsc", Status.NEW);
+        Task task4 = new Task("name4", "dsc4", Status.NEW);
         task4.setId(4);
-        Task task5 = new Task("name", "dsc", Status.NEW);
+        Task task5 = new Task("name5", "dsc5", Status.NEW);
         task5.setId(5);
-        Task task6 = new Task("name", "dsc", Status.NEW);
+        Task task6 = new Task("name6", "dsc6", Status.NEW);
         task6.setId(6);
-        Epic epic1 = new Epic("name", "dsc");
+        Epic epic1 = new Epic("name1", "dsc1");
         epic1.setId(7);
-        Epic epic2 = new Epic("name", "dsc");
+        Epic epic2 = new Epic("name2", "dsc2");
         epic2.setId(8);
-        Subtask subtask1 = new Subtask("name", "dsc", Status.NEW, 111);
+        Subtask subtask1 = new Subtask("name1", "dsc1", Status.NEW, 111, duration, startTime);
         subtask1.setId(9);
-        Subtask subtask2 = new Subtask("name", "dsc", Status.NEW, 111);
+        Subtask subtask2 = new Subtask("name2", "dsc2", Status.NEW, 111, duration, startTime);
         subtask2.setId(10);
-        Subtask subtask3 = new Subtask("name", "dsc", Status.NEW, 111);
+        Subtask subtask3 = new Subtask("name3", "dsc3", Status.NEW, 111, duration, startTime);
         subtask3.setId(11);
 
         historyManager.add(task1);
@@ -52,34 +56,34 @@ class InMemoryHistoryManagerTest {
 
     @Test
     void shouldAddTaskAndGetHistory() {
-        historyManager.add(new Task("name", "dsc", Status.NEW));
+        historyManager.add(new Task("name1", "dsc1", Status.NEW));
         assertEquals(12, historyManager.getHistory().size());
-        assertEquals("name", historyManager.getHistory().getFirst().getName());
+        assertEquals("name1", historyManager.getHistory().getFirst().getName());
     }
 
     @Test
     void shouldRemoveTaskFromHistory() {
-        Task task1 = new Task("name", "dsc", Status.NEW);
+        Task task1 = new Task("name1", "dsc1", Status.NEW);
         task1.setId(1);
-        Task task2 = new Task("name", "dsc", Status.NEW);
+        Task task2 = new Task("name2", "dsc2", Status.NEW);
         task2.setId(2);
-        Task task3 = new Task("name", "dsc", Status.NEW);
+        Task task3 = new Task("name3", "dsc3", Status.NEW);
         task3.setId(3);
-        Task task4 = new Task("name", "dsc", Status.NEW);
+        Task task4 = new Task("name4", "dsc4", Status.NEW);
         task4.setId(4);
-        Task task5 = new Task("name", "dsc", Status.NEW);
+        Task task5 = new Task("name5", "dsc5", Status.NEW);
         task5.setId(5);
-        Task task6 = new Task("name", "dsc", Status.NEW);
+        Task task6 = new Task("name6", "dsc6", Status.NEW);
         task6.setId(6);
-        Epic epic1 = new Epic("name", "dsc");
+        Epic epic1 = new Epic("name7", "dsc7");
         epic1.setId(7);
-        Epic epic2 = new Epic("name", "dsc");
+        Epic epic2 = new Epic("name8", "dsc8");
         epic2.setId(8);
-        Subtask subtask1 = new Subtask("name", "dsc", Status.NEW, 999);
+        Subtask subtask1 = new Subtask("name1", "dsc1", Status.NEW, 999, duration, startTime);
         subtask1.setId(9);
-        Subtask subtask2 = new Subtask("name", "dsc", Status.NEW, 999);
+        Subtask subtask2 = new Subtask("name2", "dsc2", Status.NEW, 999, duration, startTime);
         subtask2.setId(10);
-        Subtask subtask3 = new Subtask("name", "dsc", Status.NEW, 999);
+        Subtask subtask3 = new Subtask("name3", "dsc3", Status.NEW, 999, duration, startTime);
         subtask3.setId(11);
 
         ArrayList<Task> list = new ArrayList<>();
